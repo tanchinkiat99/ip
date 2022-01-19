@@ -1,0 +1,8 @@
+todo brush my teeth
+event wash my clothes /at 12pm-1pm
+deadline submit my essay /by Monday 4pm
+mark 1
+list
+unmark 1
+list
+bye
