@@ -4,7 +4,7 @@ public class Tutu {
     private static ArrayList<Task> items = new ArrayList<>();
 
     public enum Function {
-        LIST, ADD, MARK, UNMARK
+        LIST, ADD, MARK, UNMARK, TODO, DEADLINE, EVENT
     }
 
     public static Function checkFunction(String cmd) {
@@ -14,6 +14,12 @@ public class Tutu {
             return Function.MARK;
         } else if (cmd.length() > 7 && cmd.substring(0, 7).equals("unmark ")) {
             return Function.UNMARK;
+        } else if (cmd.length() > 5 && cmd.substring(0, 5).equals("todo ")) {
+            return Function.TODO;
+        } else if (cmd.length() > 9 && cmd.substring(0, 9).equals("deadline ")) {
+            return Function.DEADLINE;
+        } else if (cmd.length() > 6 && cmd.substring(0, 6).equals("event ")) {
+            return Function.EVENT;
         } else {
             return Function.ADD;
         }
@@ -26,6 +32,13 @@ public class Tutu {
         Task task = new Task(cmd);
         items.add(task);
         System.out.println("added: " + task.getTask());
+        Tutu.separator();
+    }
+    public static void add(Task task) {
+        items.add(task);
+        System.out.println("Got it. I've added this task:\n" + task.isDone());
+        System.out.println(String.format("Now you have %d task%s in the list."
+                , items.size(), items.size() == 1 ? "" : "s"));
         Tutu.separator();
     }
     public static void list() {
@@ -49,31 +62,6 @@ public class Tutu {
         separator();
     }
 
-    public static class Task {
-        private String task;
-        private boolean done;
-
-        public Task(String task) {
-            this.task = task;
-            this.done = false;
-        }
-
-        public String getTask() {
-            return this.task;
-        }
-
-        public void setDone() {
-            this.done = true;
-        }
-
-        public void setNotDone() {
-            this.done = false;
-        }
-
-        public String isDone() {
-            return String.format("[%s] %s", this.done ? "X" : " ", this.task);
-        }
-    }
     public static void main(String[] args) {
         Tutu.separator();
         System.out.println("Hello! I'm Tutu\nWhat can I do for you?");
@@ -86,7 +74,7 @@ public class Tutu {
                     list();
                     break;
                 case ADD:
-                    add(cmd);
+                    add(new Task(cmd));
                     break;
                 case MARK:
                     int i = Integer.parseInt(cmd.substring(5)); // throw NumberFormatException if not valid
@@ -103,6 +91,21 @@ public class Tutu {
                     } else {
                         System.out.println("Oops! Index is out of range");
                     }
+                    break;
+                case TODO:
+                    String todo = cmd.substring(5);
+                    ToDo t = new ToDo(todo);
+                    add(t);
+                    break;
+                case DEADLINE:
+                    String deadline = cmd.substring(9);
+                    Deadline dl = new Deadline(deadline);
+                    add(dl);
+                    break;
+                case EVENT:
+                    String event = cmd.substring(6);
+                    Event e = new Event(event);
+                    add(e);
                     break;
                 default:
                     break;
