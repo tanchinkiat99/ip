@@ -4,7 +4,7 @@ public class Tutu {
     private static ArrayList<Task> items = new ArrayList<>();
 
     public enum Function {
-        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT
+        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
     }
 
     public static Function checkFunction(String cmd) throws InvalidInputException {
@@ -20,6 +20,8 @@ public class Tutu {
             return Function.DEADLINE;
         } else if (cmd.length() > 4 && cmd.substring(0, 5).equals("event")) {
             return Function.EVENT;
+        } else if (cmd.length() > 5 && cmd.substring(0, 6).equals("delete")) {
+            return Function.DELETE;
         } else {
             throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -55,6 +57,23 @@ public class Tutu {
         undone.setNotDone();
         System.out.println("OK, I've marked this task as not done yet:\n" + undone.isDone());
         separator();
+    }
+
+    public static void delete(String cmd) throws InvalidInputException {
+        if (cmd.length() < 8) {
+            throw new InvalidInputException("☹ OOPS!!! Please include the task you want to delete.");
+        } else {
+            int i = Integer.parseInt(cmd.substring(7));
+            if (i > items.size()) {
+                throw new InvalidInputException("☹ OOPS!!! This task does not exist.");
+            } else {
+                System.out.println("Noted. I have removed this task:");
+                System.out.println(items.get(i - 1).isDone());
+                items.remove(i - 1);
+                System.out.println(String.format("You now have %d task%s in the list."
+                        , items.size(), items.size() == 1 ? "" : "s"));
+            }
+        }
     }
 
     public static void main(String[] args) throws InvalidInputException {
@@ -97,8 +116,11 @@ public class Tutu {
                         Event e = new Event(cmd);
                         add(e);
                         break;
-                    default:
+                    case DELETE:
+                        delete(cmd);
                         break;
+                    default:
+                        throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (InvalidInputException e) {
                 System.err.println(e);
