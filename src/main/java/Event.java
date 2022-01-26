@@ -1,5 +1,10 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    private String event;
+    private LocalDateTime event;
+    private LocalDateTime end;
 
     public Event(String task) throws InvalidInputException {
         super(task);
@@ -11,13 +16,24 @@ public class Event extends Task {
                 throw new InvalidInputException("Please include the date and time of event!");
             } else {
                 super.task = ss[0];
-                this.event = ss[1];
+
+                String[] dateTime = ss[1].split(" ");
+
+                LocalDate d = LocalDate.parse(dateTime[0]);
+                LocalDateTime dt = d.atTime(Integer.parseInt(dateTime[1].substring(0, 2)),
+                        Integer.parseInt(dateTime[1].substring(2)));
+                this.event = dt;
+                this.end = d.atTime(Integer.parseInt(dateTime[3].substring(0, 2)),
+                        Integer.parseInt(dateTime[3].substring(2)));
             }
         }
     }
 
     @Override
     public String isDone() {
-        return String.format("[E][%s] %s (at: %s)", super.done ? "X" : " ", super.task, this.event);
+        return String.format("[E][%s] %s (at: %s, from %s to %s)", super.done ? "X" : " ", super.task,
+                this.event.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a")),
+                this.event.format(DateTimeFormatter.ofPattern("h:mm a")),
+                this.end.format(DateTimeFormatter.ofPattern("h:mm a")));
     }
 }
