@@ -30,10 +30,10 @@ public class Storage {
         return f;
     }
 
-    public void update(ArrayList<Task> items) throws IOException {
+    public void update(TaskList items) throws IOException {
         FileWriter fw = new FileWriter(this.file);
-        for (int i = 1; i <= items.size(); i++) {
-            fw.write(i + ". " + items.get(i - 1).isDone() + "\n");
+        for (int i = 1; i <= items.taskNumber(); i++) {
+            fw.write(i + ". " + items.retrieve(i).isDone() + "\n");
         }
         fw.close();
     }
