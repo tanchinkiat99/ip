@@ -1,9 +1,5 @@
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class Tutu {
@@ -44,13 +40,7 @@ public class Tutu {
                 , items.size(), items.size() == 1 ? "" : "s"));
         Tutu.separator();
     }
-    public static void list() {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 1; i <= items.size(); i++) {
-            System.out.println(i + ". " + items.get(i - 1).isDone());
-        }
-        Tutu.separator();
-    }
+
     public static void mark(int i) {
         Task done = items.get(i - 1);
         done.setDone();
@@ -82,23 +72,9 @@ public class Tutu {
         }
     }
 
-    public static void update(File f) throws IOException {
-        FileWriter fw = new FileWriter(f);
-        for (int i = 1; i <= items.size(); i++) {
-            fw.write(i + ". " + items.get(i - 1).isDone());
-        }
-        fw.close();
-    }
-
     public static void main(String[] args) throws InvalidInputException, IOException {
-        Path p = Paths.get("./data");
-        System.out.println(Files.exists(p));
-        File f = new File("./data/tut.txt");
-        if (!Files.exists(p)) {
-            File path = new File("./data");
-            path.mkdir();
-        }
-        f.createNewFile();
+        Storage store = new Storage("./data");
+        File f = store.initialize();
 
         Tutu.separator();
         System.out.println("Hello! I'm Tutu\nWhat can I do for you?");
@@ -110,13 +86,13 @@ public class Tutu {
             try {
                 switch (checkFunction(cmd)) {
                     case LIST:
-                        list();
+                        store.list();
                         break;
                     case MARK:
                         int i = Integer.parseInt(cmd.substring(5)); // throw NumberFormatException if not valid
                         if (i <= items.size()) {
                             mark(i);
-                            update(f);
+                            store.update(items);
                         } else {
                             System.out.println("Oops! Index is out of range");
                         }
@@ -125,7 +101,7 @@ public class Tutu {
                         int j = Integer.parseInt(cmd.substring(7)); // throw NumberFormatException if not valid
                         if (j <= items.size()) {
                             unmark(j);
-                            update(f);
+                            store.update(items);
                         } else {
                             System.out.println("Oops! Index is out of range");
                         }
@@ -133,21 +109,21 @@ public class Tutu {
                     case TODO:
                         ToDo t = new ToDo(cmd);
                         add(t);
-                        update(f);
+                        store.update(items);
                         break;
                     case DEADLINE:
                         Deadline dl = new Deadline(cmd);
                         add(dl);
-                        update(f);
+                        store.update(items);
                         break;
                     case EVENT:
                         Event e = new Event(cmd);
                         add(e);
-                        update(f);
+                        store.update(items);
                         break;
                     case DELETE:
                         delete(cmd);
-                        update(f);
+                        store.update(items);
                         break;
                     default:
                         throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
