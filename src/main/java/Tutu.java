@@ -1,3 +1,9 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Tutu {
@@ -76,7 +82,24 @@ public class Tutu {
         }
     }
 
-    public static void main(String[] args) throws InvalidInputException {
+    public static void update(File f) throws IOException {
+        FileWriter fw = new FileWriter(f);
+        for (int i = 1; i <= items.size(); i++) {
+            fw.write(i + ". " + items.get(i - 1).isDone());
+        }
+        fw.close();
+    }
+
+    public static void main(String[] args) throws InvalidInputException, IOException {
+        Path p = Paths.get("./data");
+        System.out.println(Files.exists(p));
+        File f = new File("./data/tut.txt");
+        if (!Files.exists(p)) {
+            File path = new File("./data");
+            path.mkdir();
+        }
+        f.createNewFile();
+
         Tutu.separator();
         System.out.println("Hello! I'm Tutu\nWhat can I do for you?");
         Tutu.separator();
@@ -92,6 +115,7 @@ public class Tutu {
                         int i = Integer.parseInt(cmd.substring(5)); // throw NumberFormatException if not valid
                         if (i <= items.size()) {
                             mark(i);
+                            update(f);
                         } else {
                             System.out.println("Oops! Index is out of range");
                         }
@@ -100,6 +124,7 @@ public class Tutu {
                         int j = Integer.parseInt(cmd.substring(7)); // throw NumberFormatException if not valid
                         if (j <= items.size()) {
                             unmark(j);
+                            update(f);
                         } else {
                             System.out.println("Oops! Index is out of range");
                         }
@@ -107,17 +132,21 @@ public class Tutu {
                     case TODO:
                         ToDo t = new ToDo(cmd);
                         add(t);
+                        update(f);
                         break;
                     case DEADLINE:
                         Deadline dl = new Deadline(cmd);
                         add(dl);
+                        update(f);
                         break;
                     case EVENT:
                         Event e = new Event(cmd);
                         add(e);
+                        update(f);
                         break;
                     case DELETE:
                         delete(cmd);
+                        update(f);
                         break;
                     default:
                         throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
