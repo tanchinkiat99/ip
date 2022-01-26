@@ -103,8 +103,9 @@ public class Tutu {
         Tutu.separator();
         System.out.println("Hello! I'm Tutu\nWhat can I do for you?");
         Tutu.separator();
-        Scanner sc = new Scanner(System.in);
-        String cmd = sc.nextLine();
+
+        Ui ui = new Ui();
+        String cmd = ui.read();
         while (!cmd.equals("bye")) {
             try {
                 switch (checkFunction(cmd)) {
@@ -152,9 +153,9 @@ public class Tutu {
                         throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (InvalidInputException e) {
-                System.err.println(e);
+                ui.displayError(e);
             }
-            cmd = sc.nextLine();
+            cmd = ui.read();
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
