@@ -1,3 +1,5 @@
+package tutu.task;
+
 public class Task {
     protected String task;
     protected boolean done;
@@ -5,10 +7,6 @@ public class Task {
     public Task(String task) {
         this.task = task;
         this.done = false;
-    }
-
-    public String getTask() {
-        return this.task;
     }
 
     public void setDone() {
@@ -23,7 +21,4 @@ public class Task {
         return String.format("[%s] %s", this.done ? "X" : " ", this.task);
     }
 
-    public void added() {
-
-    }
 }

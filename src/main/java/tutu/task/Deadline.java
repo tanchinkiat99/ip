@@ -1,6 +1,9 @@
+package tutu.task;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import tutu.exception.InvalidInputException;
 
 public class Deadline extends Task {
     private LocalDateTime deadline;

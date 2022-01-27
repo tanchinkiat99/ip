@@ -1,3 +1,7 @@
+package tutu.data;
+
+import tutu.task.Task;
+import tutu.exception.InvalidInputException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -20,7 +24,6 @@ public class TaskList {
         System.out.println("Got it. I've added this task:\n" + task.isDone());
         System.out.println(String.format("Now you have %d task%s in the list."
                 , items.size(), items.size() == 1 ? "" : "s"));
-        Tutu.separator();
     }
 
     public void delete(String cmd) throws InvalidInputException {
@@ -44,13 +47,11 @@ public class TaskList {
         Task done = items.get(i - 1);
         done.setDone();
         System.out.println("Nice! I've marked this task as done:\n" + done.isDone());
-        Tutu.separator();
     }
 
     public void unmark(int i) {
         Task undone = items.get(i - 1);
         undone.setNotDone();
         System.out.println("OK, I've marked this task as not done yet:\n" + undone.isDone());
-        Tutu.separator();
     }
 }

@@ -1,13 +1,15 @@
+import tutu.data.TaskList;
+import tutu.task.*;
+import tutu.exception.InvalidInputException;
+import tutu.user.Parser;
+import tutu.user.Ui;
+import tutu.data.Storage;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
 
 public class Tutu {
     private static TaskList taskList = new TaskList();
-
-    public enum Function {
-        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
-    }
 
     public static void separator() {
         System.out.println("******************************************");

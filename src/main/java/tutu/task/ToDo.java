@@ -1,3 +1,7 @@
+package tutu.task;
+
+import tutu.exception.InvalidInputException;
+
 public class ToDo extends Task {
 
     public ToDo(String task) throws InvalidInputException {
