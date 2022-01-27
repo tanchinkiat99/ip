@@ -4,21 +4,39 @@ import tutu.task.Task;
 import tutu.exception.InvalidInputException;
 import java.util.ArrayList;
 
+/** Represents a TaskList object to store the tasks. */
 public class TaskList {
+    /** Stores the tasks added as Task objects in an ArrayList object. */
     private ArrayList<Task> items;
 
+    /**
+     * Constructor to create a TaskList Object.
+     */
     public TaskList() {
         this.items = new ArrayList<Task>();
     }
 
+    /**
+     * Returns the number of tasks in the TaskList object.
+     * @return Number of tasks.
+     */
     public int taskNumber() {
         return items.size();
     }
 
+    /**
+     * Retrieves the task at a specified index.
+     * @param i Index of task to be retrieved.
+     * @return Task object representing the task at index i.
+     */
     public Task retrieve(int i) {
         return items.get(i - 1);
     }
 
+    /**
+     * Adds a task to be stored in the TaskList object.
+     * @param task Command input from user with description of task to be added.
+     */
     public void add(Task task) {
         items.add(task);
         System.out.println("Got it. I've added this task:\n" + task.isDone());
@@ -26,6 +44,11 @@ public class TaskList {
                 , items.size(), items.size() == 1 ? "" : "s"));
     }
 
+    /**
+     * Removes a specified task from the TaskList object.
+     * @param cmd Command input from user specifying index of task to be removed.
+     * @throws InvalidInputException If the index input from user is invalid.
+     */
     public void delete(String cmd) throws InvalidInputException {
         if (cmd.length() < 8) {
             throw new InvalidInputException("☹ OOPS!!! Please include the task you want to delete.");
@@ -43,12 +66,20 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks a task as done.
+     * @param i Index of task that user wants to mark as done.
+     */
     public void mark(int i) {
         Task done = items.get(i - 1);
         done.setDone();
         System.out.println("Nice! I've marked this task as done:\n" + done.isDone());
     }
 
+    /**
+     * Marks a task as not done.
+     * @param i Index of task that user wants to mark as not done.
+     */
     public void unmark(int i) {
         Task undone = items.get(i - 1);
         undone.setNotDone();

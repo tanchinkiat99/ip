@@ -6,10 +6,18 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/** Represents an Event task. */
 public class Event extends Task {
+    /** Start date and time of the event */
     private LocalDateTime event;
+    /** End date and time of the event */
     private LocalDateTime end;
 
+    /**
+     * Constructor to create an Event object.
+     * @param task Command input from user.
+     * @throws InvalidInputException If input is invalid.
+     */
     public Event(String task) throws InvalidInputException {
         super(task);
         if (task.length() < 6) {
@@ -32,7 +40,10 @@ public class Event extends Task {
             }
         }
     }
-
+    /**
+     * Returns a description of the task, whether it is done, start date and time and end time.
+     * @return Description of task and event time.
+     */
     @Override
     public String isDone() {
         return String.format("[E][%s] %s (at: %s, from %s to %s)", super.done ? "X" : " ", super.task,
