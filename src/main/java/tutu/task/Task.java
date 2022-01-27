@@ -21,4 +21,7 @@ public class Task {
         return String.format("[%s] %s", this.done ? "X" : " ", this.task);
     }
 
+    public boolean isMatch(String key) {
+        return this.task.contains(key);
+    }
 }

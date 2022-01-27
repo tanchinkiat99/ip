@@ -5,7 +5,7 @@ import tutu.exception.InvalidInputException;
 public class Parser {
 
     public enum Function {
-        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
+        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND
     }
 
     public static Function checkFunction(String cmd) throws InvalidInputException {
@@ -23,6 +23,8 @@ public class Parser {
             return Function.EVENT;
         } else if (cmd.length() > 5 && cmd.substring(0, 6).equals("delete")) {
             return Function.DELETE;
+        } else if (cmd.length() > 4 && cmd.substring(0, 4).equals("find")) {
+            return Function.FIND;
         } else {
             throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

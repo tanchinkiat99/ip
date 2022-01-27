@@ -2,13 +2,15 @@ package tutu.data;
 
 import tutu.task.Task;
 import tutu.exception.InvalidInputException;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> items;
 
     public TaskList() {
-        this.items = new ArrayList<Task>();
+        this.items = new ArrayList<>();
     }
 
     public int taskNumber() {
@@ -53,5 +55,28 @@ public class TaskList {
         Task undone = items.get(i - 1);
         undone.setNotDone();
         System.out.println("OK, I've marked this task as not done yet:\n" + undone.isDone());
+    }
+
+    public void find(String cmd) throws InvalidInputException {
+        if (cmd.length() < 6) {
+            throw new InvalidInputException("Please input a keyword!");
+        } else {
+            String key = cmd.substring(5);
+            ArrayList<String> matches = new ArrayList<>();
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i).isMatch(key)) {
+                    int index = i + 1;
+                    matches.add(index + ". " + items.get(i).isDone());
+                }
+            }
+            if (matches.size() == 0) {
+                System.out.println("No matching tasks were found...");
+            } else {
+                System.out.println("Here are the matching tasks in your list:");
+                for (int j = 0; j < matches.size(); j++) {
+                    System.out.println(matches.get(j));
+                }
+            }
+        }
     }
 }

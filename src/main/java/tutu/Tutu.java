@@ -70,6 +70,9 @@ public class Tutu {
                         taskList.delete(cmd);
                         store.update(taskList);
                         break;
+                    case FIND:
+                        taskList.find(cmd);
+                        break;
                     default:
                         throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
