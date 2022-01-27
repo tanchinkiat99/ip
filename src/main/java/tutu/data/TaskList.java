@@ -1,8 +1,8 @@
 package tutu.data;
 
+import java.util.ArrayList;
 import tutu.task.Task;
 import tutu.exception.InvalidInputException;
-import java.util.ArrayList;
 
 /** Represents a TaskList object to store the tasks. */
 public class TaskList {
