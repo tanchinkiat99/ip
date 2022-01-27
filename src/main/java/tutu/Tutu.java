@@ -1,3 +1,5 @@
+package tutu;
+
 import tutu.data.TaskList;
 import tutu.task.*;
 import tutu.exception.InvalidInputException;
