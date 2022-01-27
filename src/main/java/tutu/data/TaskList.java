@@ -3,7 +3,6 @@ package tutu.data;
 import tutu.task.Task;
 import tutu.exception.InvalidInputException;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TaskList {
