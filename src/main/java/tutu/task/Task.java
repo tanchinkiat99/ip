@@ -38,6 +38,11 @@ public class Task {
         return String.format("[%s] %s", this.done ? "X" : " ", this.task);
     }
 
+    /**
+     * Determines if task description contains keyword.
+     * @param key Keyword input by user.
+     * @return Boolean value indicating if task contains keyword.
+     */
     public boolean isMatch(String key) {
         return this.task.contains(key);
     }

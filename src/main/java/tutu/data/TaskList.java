@@ -85,6 +85,12 @@ public class TaskList {
         undone.setNotDone();
         System.out.println("OK, I've marked this task as not done yet:\n" + undone.isDone());
     }
+
+    /**
+     * Finds the tasks matching a keyword.
+     * @param cmd Command input by user containing keyword to match tasks.
+     * @throws InvalidInputException If user input is invalid.
+     */
     public void find(String cmd) throws InvalidInputException {
         if (cmd.length() < 6) {
             throw new InvalidInputException("Please input a keyword!");
