@@ -56,7 +56,7 @@ public class TaskList {
         System.out.println("OK, I've marked this task as not done yet:\n" + undone.isDone());
     }
 
-    public void find(String cmd) throws InvalidInputException {
+    public void find(String cmd) throws InvalidInputException { // finding
         if (cmd.length() < 6) {
             throw new InvalidInputException("Please input a keyword!");
         } else {
