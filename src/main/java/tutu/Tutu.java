@@ -1,18 +1,22 @@
 package tutu;
 
-import tutu.data.TaskList;
-import tutu.task.*;
-import tutu.exception.InvalidInputException;
-import tutu.user.Parser;
-import tutu.user.Ui;
-import tutu.data.Storage;
-
 import java.io.File;
 import java.io.IOException;
+import tutu.data.Storage;
+import tutu.data.TaskList;
+import tutu.exception.InvalidInputException;
+import tutu.task.*;
+import tutu.user.Parser;
+import tutu.user.Ui;
 
+/** Represents a todo list that takes in command inputs from the user. */
 public class Tutu {
+    /** TaskList object that stores the tasks added */
     private static TaskList taskList = new TaskList();
 
+    /**
+     * Prints a line of asterisks to separate between user inputs and resulting outputs.
+     */
     public static void separator() {
         System.out.println("******************************************");
     }
