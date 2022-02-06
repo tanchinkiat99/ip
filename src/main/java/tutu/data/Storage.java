@@ -53,4 +53,19 @@ public class Storage {
         }
     }
 
+    public String guiList() {
+        String tasks = "Here are the tasks in your list:";
+        try {
+            Scanner reader = new Scanner(this.file);
+            while (reader.hasNextLine()) {
+                String task = reader.nextLine();
+                tasks += ("\n" + task);
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            System.err.println("File was not found");
+        }
+        return tasks;
+    }
+
 }

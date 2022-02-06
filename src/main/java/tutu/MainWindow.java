@@ -7,8 +7,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import tutu.DialogBox;
-import tutu.Tutu;
+import tutu.data.Storage;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Controller for tutu.MainWindow. Provides the layout for the other controls.
@@ -25,6 +27,8 @@ public class MainWindow extends AnchorPane {
 
     private Tutu duke;
 
+    private Storage store;
+
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/tanjiro.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/zenitsu.jpg"));
 
@@ -33,6 +37,15 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog("Hello! I'm Mr. Tutu!\nWhat can I do for you?", dukeImage)
+        );
+        this.store = new Storage("./data");
+        try {
+            File f = store.initialize();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setDuke(Tutu d) {
@@ -46,7 +59,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = duke.getResponse(input, store);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

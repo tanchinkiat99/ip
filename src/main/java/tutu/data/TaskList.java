@@ -44,6 +44,12 @@ public class TaskList {
                 , items.size(), items.size() == 1 ? "" : "s"));
     }
 
+    public String guiAdd(Task task) {
+        items.add(task);
+        return String.format("Got it. I've added this task:\n%s\nNow you have %d task%s in the list."
+                , task.isDone(), items.size(), items.size() == 1 ? "" : "s");
+    }
+
     /**
      * Removes a specified task from the TaskList object.
      * @param cmd Command input from user specifying index of task to be removed.
@@ -66,6 +72,22 @@ public class TaskList {
         }
     }
 
+    public String guiDelete(String cmd) throws InvalidInputException {
+        if (cmd.length() < 8) {
+            throw new InvalidInputException("☹ OOPS!!! Please include the task you want to delete.");
+        } else {
+            int i = Integer.parseInt(cmd.substring(7));
+            if (i > items.size()) {
+                throw new InvalidInputException("☹ OOPS!!! This task does not exist.");
+            } else {
+                String deleted = items.get(i - 1).isDone();
+                items.remove(i - 1);
+                return String.format("Noted. I have removed this task:\n%sYou now have %d task%s in the list."
+                        , deleted, items.size(), items.size() == 1 ? "" : "s");
+            }
+        }
+    }
+
     /**
      * Marks a task as done.
      * @param i Index of task that user wants to mark as done.
@@ -76,6 +98,12 @@ public class TaskList {
         System.out.println("Nice! I've marked this task as done:\n" + done.isDone());
     }
 
+    public String guiMark(int i) {
+        Task done = items.get(i - 1);
+        done.setDone();
+        return "Nice! I've marked this task as done:\n" + done.isDone();
+    }
+
     /**
      * Marks a task as not done.
      * @param i Index of task that user wants to mark as not done.
@@ -84,6 +112,12 @@ public class TaskList {
         Task undone = items.get(i - 1);
         undone.setNotDone();
         System.out.println("OK, I've marked this task as not done yet:\n" + undone.isDone());
+    }
+
+    public String guiUnmark(int i) {
+        Task undone = items.get(i - 1);
+        undone.setNotDone();
+        return "OK, I've marked this task as not done yet:\n" + undone.isDone();
     }
 
     /**
@@ -110,6 +144,30 @@ public class TaskList {
                 for (int j = 0; j < matches.size(); j++) {
                     System.out.println(matches.get(j));
                 }
+            }
+        }
+    }
+
+    public String guiFind(String cmd) throws InvalidInputException {
+        if (cmd.length() < 6) {
+            throw new InvalidInputException("Please input a keyword!");
+        } else {
+            String key = cmd.substring(5);
+            ArrayList<String> matches = new ArrayList<>();
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i).isMatch(key)) {
+                    int index = i + 1;
+                    matches.add(index + ". " + items.get(i).isDone());
+                }
+            }
+            if (matches.size() == 0) {
+                return "No matching tasks were found...";
+            } else {
+                String list = "Here are the matching tasks in your list:";
+                for (int j = 0; j < matches.size(); j++) {
+                    list += ("\n" + matches.get(j));
+                }
+                return list;
             }
         }
     }
