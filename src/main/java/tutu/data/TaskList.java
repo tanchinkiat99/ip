@@ -44,6 +44,7 @@ public class TaskList {
      * @return Task object representing the task at index i.
      */
     public Task retrieve(int i) {
+        assert (i > 0);
         return items.get(i - 1);
     }
 
