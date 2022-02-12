@@ -10,6 +10,8 @@ public class TaskList {
     /** Stores the tasks added as Task objects in an ArrayList object. */
     private ArrayList<Task> items;
 
+    private static final String OUT_OF_RANGE = "Oops! Index is out of range";
+
     /**
      * Constructor to create a TaskList Object.
      */
@@ -73,6 +75,9 @@ public class TaskList {
      * @return String containing marked task.
      */
     public String mark(int i) {
+        if (i > taskNumber()) {
+            return OUT_OF_RANGE;
+        }
         Task done = items.get(i - 1);
         done.setDone();
         return "Nice! I've marked this task as done:\n" + done.isDone();
@@ -84,6 +89,9 @@ public class TaskList {
      * @return String containing unmarked task.
      */
     public String unmark(int i) {
+        if (i > taskNumber()) {
+            return OUT_OF_RANGE;
+        }
         Task undone = items.get(i - 1);
         undone.setNotDone();
         return "OK, I've marked this task as not done yet:\n" + undone.isDone();
