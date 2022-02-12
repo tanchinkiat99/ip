@@ -1,10 +1,10 @@
 package tutu.task;
 
-import tutu.exception.InvalidInputException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import tutu.exception.InvalidInputException;
 
 /** Represents an Event task. */
 public class Event extends Task {

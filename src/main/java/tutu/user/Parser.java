@@ -8,6 +8,12 @@ public class Parser {
         LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND
     }
 
+    /**
+     * Parses the input String command by user.
+     * @param cmd Command input by user.
+     * @return Function value indicating which command should be executed.
+     * @throws InvalidInputException
+     */
     public static Function checkFunction(String cmd) throws InvalidInputException {
         if (cmd.equals("list")) {
             return Function.LIST;
