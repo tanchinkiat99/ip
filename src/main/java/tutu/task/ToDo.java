@@ -19,9 +19,8 @@ public class ToDo extends Task {
         super(task);
         if (super.task.length() < MINIMUM_INPUT_LENGTH) {
             throw new InvalidInputException(EMPTY_INPUT_RESPONSE);
-        } else {
-            super.task = super.task.substring(5);
         }
+        super.task = super.task.substring(5);
     }
 
     /**

@@ -9,21 +9,23 @@ import tutu.task.Deadline;
 import tutu.task.Event;
 import tutu.task.ToDo;
 import tutu.user.Parser;
-import tutu.user.Ui;
 
 /** Represents a todo list that takes in command inputs from the user. */
 public class Tutu {
     /** TaskList object that stores the tasks added */
     private static TaskList taskList = new TaskList();
 
-    private Ui ui = new Ui();
+    /** Exit message */
+    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+    /** Response message for invalid user input */
+    private static final String INVALID_INPUT = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     public String getResponse(String input, Storage store) {
         String response = "";
         try {
             switch (Parser.checkFunction(input)) {
             case BYE:
-                response = "Bye. Hope to see you again soon!";
+                response = EXIT_MESSAGE;
                 break;
             case LIST:
                 response = store.list();
@@ -61,10 +63,9 @@ public class Tutu {
                 response = taskList.find(input);
                 break;
             default:
-                throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new InvalidInputException(INVALID_INPUT);
             }
         } catch (InvalidInputException | IOException e) {
-            ui.displayError(e);
             return String.valueOf(e);
         }
         return response;
