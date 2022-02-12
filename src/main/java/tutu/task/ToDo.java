@@ -7,8 +7,8 @@ public class ToDo extends Task {
     /** Minimum size of input */
     private static final int MINIMUM_INPUT_LENGTH = 6;
     /** Error message for empty task description */
-    private static final String EMPTY_INPUT_RESPONSE = "☹ OOPS!!! The description of a " +
-            "todo cannot be empty.";
+    private static final String EMPTY_INPUT_RESPONSE = "☹ OOPS!!! The description of a "
+            + "todo cannot be empty.";
 
     /**
      * Constructor to create a ToDo object

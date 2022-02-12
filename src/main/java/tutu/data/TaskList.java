@@ -7,9 +7,6 @@ import tutu.task.Task;
 
 /** Represents a TaskList object to store the tasks. */
 public class TaskList {
-    /** Stores the tasks added as Task objects in an ArrayList object. */
-    private ArrayList<Task> items;
-
     /** Minimum size of input for delete function */
     private static final int MINIMUM_DELETE_INPUT_LENGTH = 8;
     /** Minimum size of input for find function */
@@ -22,6 +19,9 @@ public class TaskList {
     private static final String EMPTY_FIND_INPUT = "Please input a keyword!";
     /** Response message for 0 matches for find command */
     private static final String NO_TASKS_FOUND = "No matching tasks were found...";
+
+    /** Stores the tasks added as Task objects in an ArrayList object. */
+    private ArrayList<Task> items;
 
     /**
      * Constructor to create a TaskList Object.
