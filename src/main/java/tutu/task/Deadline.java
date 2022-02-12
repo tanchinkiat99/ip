@@ -11,6 +11,12 @@ public class Deadline extends Task {
     /** Date and time of deadline of task */
     private LocalDateTime deadline;
 
+    /** Minimum size of input */
+    private static final int MINIMUM_INPUT_LENGTH = 10;
+    /** Error message for empty task description */
+    private static final String EMPTY_INPUT_RESPONSE = "☹ OOPS!!! The description of a " +
+            "deadline cannot be empty.";
+
     /**
      * Constructor to create a Deadline object.
      * @param task Command input from user.
@@ -18,8 +24,8 @@ public class Deadline extends Task {
      */
     public Deadline(String task) throws InvalidInputException {
         super(task);
-        if (super.task.length() < 10) {
-            throw new InvalidInputException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        if (super.task.length() < MINIMUM_INPUT_LENGTH) {
+            throw new InvalidInputException(EMPTY_INPUT_RESPONSE);
         } else {
             String[] ss = super.task.split(" /by ");
             if (ss.length < 2) {
@@ -27,11 +33,16 @@ public class Deadline extends Task {
             } else {
                 super.task = ss[0];
 
+                // Create a String array with String values of date and time as elements
                 String[] dateTime = ss[1].split(" ");
 
+                // Store the date
                 LocalDate d = LocalDate.parse(dateTime[0]);
-                LocalDateTime dt = d.atTime(Integer.parseInt(dateTime[1].substring(0, 2)),
-                        Integer.parseInt(dateTime[1].substring(2)));
+
+                // Parse and store the time
+                int hour = Integer.parseInt(dateTime[1].substring(0, 2));
+                int minutes = Integer.parseInt(dateTime[1].substring(2));
+                LocalDateTime dt = d.atTime(hour, minutes);
                 this.deadline = dt;
             }
         }

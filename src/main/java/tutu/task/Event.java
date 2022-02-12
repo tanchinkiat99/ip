@@ -13,6 +13,12 @@ public class Event extends Task {
     /** End date and time of the event */
     private LocalDateTime end;
 
+    /** Minimum size of input */
+    private static final int MINIMUM_INPUT_LENGTH = 6;
+    /** Error message for empty task description */
+    private static final String EMPTY_INPUT_RESPONSE = "☹ OOPS!!! The description of an " +
+            "event cannot be empty.";
+
     /**
      * Constructor to create an Event object.
      * @param task Command input from user.
@@ -20,8 +26,8 @@ public class Event extends Task {
      */
     public Event(String task) throws InvalidInputException {
         super(task);
-        if (task.length() < 6) {
-            throw new InvalidInputException("☹ OOPS!!! The description of an event cannot be empty.");
+        if (task.length() < MINIMUM_INPUT_LENGTH) {
+            throw new InvalidInputException(EMPTY_INPUT_RESPONSE);
         } else {
             String[] ss = super.task.split(" /at ");
             if (ss.length < 2) {
