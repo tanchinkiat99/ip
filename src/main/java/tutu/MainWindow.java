@@ -1,5 +1,8 @@
 package tutu;
 
+import java.io.File;
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,9 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import tutu.data.Storage;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Controller for tutu.MainWindow. Provides the layout for the other controls.
@@ -34,6 +34,9 @@ public class MainWindow extends AnchorPane {
 
     public MainWindow() {}
 
+    /**
+     * Initializes the chat box interface.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

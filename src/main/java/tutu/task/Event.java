@@ -1,10 +1,10 @@
 package tutu.task;
 
-import tutu.exception.InvalidInputException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import tutu.exception.InvalidInputException;
 
 /** Represents an Event task. */
 public class Event extends Task {
@@ -13,6 +13,14 @@ public class Event extends Task {
     /** End date and time of the event */
     private LocalDateTime end;
 
+    /** Minimum size of input */
+    private static final int MINIMUM_INPUT_LENGTH = 6;
+    /** Error message for empty task description */
+    private static final String EMPTY_INPUT_RESPONSE = "☹ OOPS!!! The description of an " +
+            "event cannot be empty.";
+    /** Error message for missing date and time */
+    private static final String DATE_TIME_MISSING = "Please include the date and time of event!";
+
     /**
      * Constructor to create an Event object.
      * @param task Command input from user.
@@ -20,25 +28,24 @@ public class Event extends Task {
      */
     public Event(String task) throws InvalidInputException {
         super(task);
-        if (task.length() < 6) {
-            throw new InvalidInputException("☹ OOPS!!! The description of an event cannot be empty.");
-        } else {
-            String[] ss = super.task.split(" /at ");
-            if (ss.length < 2) {
-                throw new InvalidInputException("Please include the date and time of event!");
-            } else {
-                super.task = ss[0];
-
-                String[] dateTime = ss[1].split(" ");
-
-                LocalDate d = LocalDate.parse(dateTime[0]);
-                LocalDateTime dt = d.atTime(Integer.parseInt(dateTime[1].substring(0, 2)),
-                        Integer.parseInt(dateTime[1].substring(2)));
-                this.event = dt;
-                this.end = d.atTime(Integer.parseInt(dateTime[3].substring(0, 2)),
-                        Integer.parseInt(dateTime[3].substring(2)));
-            }
+        if (task.length() < MINIMUM_INPUT_LENGTH) {
+            throw new InvalidInputException(EMPTY_INPUT_RESPONSE);
         }
+        // Create a String array with date and time as elements
+        String[] ss = super.task.split(" /at ");
+        if (ss.length < 2) {
+            throw new InvalidInputException(DATE_TIME_MISSING);
+        }
+        super.task = ss[0];
+
+        String[] dateTime = ss[1].split(" ");
+
+        LocalDate d = LocalDate.parse(dateTime[0]);
+        LocalDateTime dt = d.atTime(Integer.parseInt(dateTime[1].substring(0, 2)),
+                Integer.parseInt(dateTime[1].substring(2)));
+        this.event = dt;
+        this.end = d.atTime(Integer.parseInt(dateTime[3].substring(0, 2)),
+                Integer.parseInt(dateTime[3].substring(2)));
     }
     /**
      * Returns a description of the task, whether it is done, start date and time and end time.

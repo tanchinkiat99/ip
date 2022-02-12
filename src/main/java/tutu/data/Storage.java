@@ -14,11 +14,19 @@ public class Storage {
     private String path;
     private File file;
 
+    /**
+     * Constructor to create a Storage object.
+     * @param path Path to file.
+     */
     public Storage(String path) {
         this.path = path;
         this.file = null;
     }
 
+    /**
+     * Creates file to store task list if file does not exist.
+     * @throws IOException If file or directory search fails.
+     */
     public File initialize() throws IOException {
         Path p = Paths.get("./data");
         File f = new File("./data/tutu.txt");
@@ -31,6 +39,10 @@ public class Storage {
         return f;
     }
 
+    /**
+     * Updates the list of items in TaskList object.
+     * @param items TaskList object containing list of tasks.
+     */
     public void update(TaskList items) throws IOException {
         FileWriter fw = new FileWriter(this.file);
         for (int i = 1; i <= items.taskNumber(); i++) {
@@ -39,21 +51,11 @@ public class Storage {
         fw.close();
     }
 
-    public void list() {
-        System.out.println("Here are the tasks in your list:");
-        try {
-            Scanner reader = new Scanner(this.file);
-            while (reader.hasNextLine()) {
-                String task = reader.nextLine();
-                System.out.println(task);
-            }
-            reader.close();
-        } catch (FileNotFoundException e) {
-            System.err.println("File was not found");
-        }
-    }
-
-    public String guiList() {
+    /**
+     * Lists the tasks currently stored in the data file.
+     * @return String containing current tasks.
+     */
+    public String list() {
         String tasks = "Here are the tasks in your list:";
         try {
             Scanner reader = new Scanner(this.file);

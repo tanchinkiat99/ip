@@ -1,3 +1,3 @@
-1. [T][ ] hi
-2. [T][ ] hey
-3. [T][ ] ho
+1. [D][ ] deadline say hi (by: Aug 9 2020, 6:00 PM)
+2. [T][ ] say hi
+3. [E][X] event say hi (at: Aug 8 2020, 8:00 AM, from 8:00 AM to 9:00 AM)

@@ -5,11 +5,19 @@ import tutu.exception.InvalidInputException;
 public class Parser {
 
     public enum Function {
-        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND
     }
 
+    /**
+     * Parses the input String command by user.
+     * @param cmd Command input by user.
+     * @return Function value indicating which command should be executed.
+     * @throws InvalidInputException
+     */
     public static Function checkFunction(String cmd) throws InvalidInputException {
-        if (cmd.equals("list")) {
+        if (cmd.equals("bye")) {
+            return Function.BYE;
+        } else if (cmd.equals("list")) {
             return Function.LIST;
         } else if (cmd.length() > 3 && cmd.substring(0, 4).equals("mark")) {
             return Function.MARK;

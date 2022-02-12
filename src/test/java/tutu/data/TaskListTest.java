@@ -1,10 +1,11 @@
 package tutu.data;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
+
 import tutu.exception.InvalidInputException;
 import tutu.task.ToDo;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
     @Test
