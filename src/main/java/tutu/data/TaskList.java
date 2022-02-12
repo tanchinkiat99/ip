@@ -30,6 +30,7 @@ public class TaskList {
      * @return Task object representing the task at index i.
      */
     public Task retrieve(int i) {
+        assert (i > 0);
         return items.get(i - 1);
     }
 
@@ -45,6 +46,7 @@ public class TaskList {
     }
 
     public String guiAdd(Task task) {
+        assert (task != null);
         items.add(task);
         return String.format("Got it. I've added this task:\n%s\nNow you have %d task%s in the list."
                 , task.isDone(), items.size(), items.size() == 1 ? "" : "s");
@@ -73,6 +75,7 @@ public class TaskList {
     }
 
     public String guiDelete(String cmd) throws InvalidInputException {
+        assert (cmd.length() > 0);
         if (cmd.length() < 8) {
             throw new InvalidInputException("☹ OOPS!!! Please include the task you want to delete.");
         } else {
@@ -93,12 +96,14 @@ public class TaskList {
      * @param i Index of task that user wants to mark as done.
      */
     public void mark(int i) {
+        assert (i > 0);
         Task done = items.get(i - 1);
         done.setDone();
         System.out.println("Nice! I've marked this task as done:\n" + done.isDone());
     }
 
     public String guiMark(int i) {
+        assert (i > 0);
         Task done = items.get(i - 1);
         done.setDone();
         return "Nice! I've marked this task as done:\n" + done.isDone();
@@ -115,6 +120,7 @@ public class TaskList {
     }
 
     public String guiUnmark(int i) {
+        assert (i > 0);
         Task undone = items.get(i - 1);
         undone.setNotDone();
         return "OK, I've marked this task as not done yet:\n" + undone.isDone();
@@ -149,6 +155,7 @@ public class TaskList {
     }
 
     public String guiFind(String cmd) throws InvalidInputException {
+        assert(cmd.length() > 0);
         if (cmd.length() < 6) {
             throw new InvalidInputException("Please input a keyword!");
         } else {
