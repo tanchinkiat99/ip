@@ -10,7 +10,18 @@ public class TaskList {
     /** Stores the tasks added as Task objects in an ArrayList object. */
     private ArrayList<Task> items;
 
+    /** Minimum size of input for delete function */
+    private static final int MINIMUM_DELETE_INPUT_LENGTH = 8;
+    /** Minimum size of input for find function */
+    private static final int MINIMUM_FIND_INPUT_LENGTH = 6;
+    /** Response message for out of range index input */
     private static final String OUT_OF_RANGE = "Oops! Index is out of range";
+    /** Response message for empty delete input */
+    private static final String EMPTY_DELETE_INPUT = "☹ OOPS!!! Please include the task you want to delete.";
+    /** Response message for empty find input */
+    private static final String EMPTY_FIND_INPUT = "Please input a keyword!";
+    /** Response message for 0 matches for find command */
+    private static final String NO_TASKS_FOUND = "No matching tasks were found...";
 
     /**
      * Constructor to create a TaskList Object.
@@ -54,19 +65,17 @@ public class TaskList {
      * @throws InvalidInputException If the index input from user is invalid.
      */
     public String delete(String cmd) throws InvalidInputException {
-        if (cmd.length() < 8) {
-            throw new InvalidInputException("☹ OOPS!!! Please include the task you want to delete.");
-        } else {
-            int i = Integer.parseInt(cmd.substring(7));
-            if (i > items.size()) {
-                throw new InvalidInputException("☹ OOPS!!! This task does not exist.");
-            } else {
-                String deleted = items.get(i - 1).isDone();
-                items.remove(i - 1);
-                return String.format("Noted. I have removed this task:\n%sYou now have %d task%s in the list.",
-                        deleted, items.size(), items.size() == 1 ? "" : "s");
-            }
+        if (cmd.length() < MINIMUM_DELETE_INPUT_LENGTH) {
+            throw new InvalidInputException(EMPTY_DELETE_INPUT);
         }
+        int i = Integer.parseInt(cmd.substring(7));
+        if (i > items.size()) {
+            throw new InvalidInputException(OUT_OF_RANGE);
+        }
+        String deleted = items.get(i - 1).isDone();
+        items.remove(i - 1);
+        return String.format("Noted. I have removed this task:\n%sYou now have %d task%s in the list.",
+                deleted, items.size(), items.size() == 1 ? "" : "s");
     }
 
     /**
@@ -104,26 +113,25 @@ public class TaskList {
      * @throws InvalidInputException If user input is invalid.
      */
     public String find(String cmd) throws InvalidInputException {
-        if (cmd.length() < 6) {
-            throw new InvalidInputException("Please input a keyword!");
+        if (cmd.length() < MINIMUM_FIND_INPUT_LENGTH) {
+            throw new InvalidInputException(EMPTY_FIND_INPUT);
+        }
+        String key = cmd.substring(5);
+        ArrayList<String> matches = new ArrayList<>();
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).isMatch(key)) {
+                int index = i + 1;
+                matches.add(index + ". " + items.get(i).isDone());
+            }
+        }
+        if (matches.size() == 0) {
+            return NO_TASKS_FOUND;
         } else {
-            String key = cmd.substring(5);
-            ArrayList<String> matches = new ArrayList<>();
-            for (int i = 0; i < items.size(); i++) {
-                if (items.get(i).isMatch(key)) {
-                    int index = i + 1;
-                    matches.add(index + ". " + items.get(i).isDone());
-                }
+            String list = "Here are the matching tasks in your list:";
+            for (int j = 0; j < matches.size(); j++) {
+                list += ("\n" + matches.get(j));
             }
-            if (matches.size() == 0) {
-                return "No matching tasks were found...";
-            } else {
-                String list = "Here are the matching tasks in your list:";
-                for (int j = 0; j < matches.size(); j++) {
-                    list += ("\n" + matches.get(j));
-                }
-                return list;
-            }
+            return list;
         }
     }
 }
