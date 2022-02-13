@@ -1,5 +1,9 @@
 package tutu.task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Comparator;
+
 /** Represents a task. */
 public class Task {
     /** Description of task */
@@ -45,5 +49,34 @@ public class Task {
      */
     public boolean isMatch(String key) {
         return this.task.contains(key);
+    }
+
+    /**
+     * Gets date of task.
+     * @return LocalDate object containing date of task.
+     */
+    public LocalDate getDate() {
+        return null;
+    }
+
+    /**
+     * Gets time of task.
+     * @return LocalTime object containing time of task.
+     */
+    public LocalTime getTime() {
+        return null;
+    }
+
+    public static class TaskTimeComparator implements Comparator<Task> {
+        @Override
+        public int compare(Task t1, Task t2) {
+            if (t1.getTime().isAfter(t2.getTime())) {
+                return 1;
+            } else if (t1.getTime().equals(t2.getTime())) {
+                return 0;
+            } else {
+                return -1;
+            }
+        }
     }
 }

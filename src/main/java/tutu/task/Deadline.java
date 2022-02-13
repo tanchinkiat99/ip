@@ -2,22 +2,23 @@ package tutu.task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import tutu.exception.InvalidInputException;
 
 /** Represents a Deadline task. */
 public class Deadline extends Task {
-    /** Date and time of deadline of task */
-    private LocalDateTime deadline;
-
     /** Minimum size of input */
     private static final int MINIMUM_INPUT_LENGTH = 10;
     /** Error message for empty task description */
-    private static final String EMPTY_INPUT_RESPONSE = "☹ OOPS!!! The description of a " +
-            "deadline cannot be empty.";
+    private static final String EMPTY_INPUT_RESPONSE = "☹ OOPS!!! The description of a "
+            + "deadline cannot be empty.";
     /** Error message for missing deadline */
     private static final String DEADLINE_MISSING = "Please include the deadline!";
+
+    /** Date and time of deadline of task */
+    private LocalDateTime deadline;
 
     /**
      * Constructor to create a Deadline object.
@@ -56,5 +57,23 @@ public class Deadline extends Task {
     public String isDone() {
         return String.format("[D][%s] %s (by: %s)", super.done ? "X" : " ", super.task,
                 this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a")));
+    }
+
+    /**
+     * Gets the LocalDate part of the deadline.
+     * @return Date of deadline.
+     */
+    @Override
+    public LocalDate getDate() {
+        return deadline.toLocalDate();
+    }
+
+    /**
+     * Gets time of deadline.
+     * @return LocalTime object containing time of deadline.
+     */
+    @Override
+    public LocalTime getTime() {
+        return deadline.toLocalTime();
     }
 }

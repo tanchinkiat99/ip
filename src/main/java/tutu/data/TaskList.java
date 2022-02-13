@@ -1,15 +1,14 @@
 package tutu.data;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import tutu.exception.InvalidInputException;
 import tutu.task.Task;
 
 /** Represents a TaskList object to store the tasks. */
 public class TaskList {
-    /** Stores the tasks added as Task objects in an ArrayList object. */
-    private ArrayList<Task> items;
-
     /** Minimum size of input for delete function */
     private static final int MINIMUM_DELETE_INPUT_LENGTH = 8;
     /** Minimum size of input for find function */
@@ -22,6 +21,13 @@ public class TaskList {
     private static final String EMPTY_FIND_INPUT = "Please input a keyword!";
     /** Response message for 0 matches for find command */
     private static final String NO_TASKS_FOUND = "No matching tasks were found...";
+    /** Response message for 0 matches for find command */
+    private static final String INVALID_SCHEDULE_FORMAT = "Please follow the format: schedule for YYYY-MM-DD";
+    /** Response message for 0 matches for empty schedule */
+    private static final String EMPTY_SCHEDULE = "You have no tasks on this day! Take a break!";
+
+    /** Stores the tasks added as Task objects in an ArrayList object. */
+    private ArrayList<Task> items;
 
     /**
      * Constructor to create a TaskList Object.
@@ -134,5 +140,53 @@ public class TaskList {
             }
             return list;
         }
+    }
+
+    /**
+     * Check if date of task matches the input date.
+     * @param task Task object to check.
+     * @param date Date to match with date of task.
+     * @return boolean value showing if date of task matches input date.
+     */
+    public boolean dateMatches(Task task, LocalDate date) {
+        if (task.getDate() == null) {
+            return false;
+        }
+        return task.getDate().isEqual(date);
+    }
+
+    /**
+     * Gets the schedule for a specified date.
+     * @param cmd Input command by user containing specified date.
+     * @return Schedule containing tasks with specified date.
+     */
+    public String getScheduleFor(String cmd) {
+        // Parse input command in the form of "schedule for yyyy-MM-DD"
+        String[] inputs = cmd.split(" ");
+
+        // If input command does not follow format
+        if (inputs.length != 3) {
+            return INVALID_SCHEDULE_FORMAT;
+        }
+
+        // Parse date and creating ArrayList of tasks with that date
+        LocalDate key = LocalDate.parse(inputs[2]);
+        ArrayList<Task> matches = new ArrayList<>();
+        for (int i = 0; i < items.size(); i++) {
+            if (dateMatches(items.get(i), key)) {
+                matches.add(items.get(i));
+            }
+        }
+
+        // If no tasks on that date
+        if (matches.size() == 0) {
+            return EMPTY_SCHEDULE;
+        }
+        String schedule = String.format("Here is your schedule for %s:\n", key.toString());
+        Collections.sort(matches, new Task.TaskTimeComparator());
+        for (int j = 0; j < matches.size(); j++) {
+            schedule += String.format("%s: %s\n", matches.get(j).getTime(), matches.get(j).isDone());
+        }
+        return schedule;
     }
 }

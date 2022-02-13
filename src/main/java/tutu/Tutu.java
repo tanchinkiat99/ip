@@ -62,6 +62,9 @@ public class Tutu {
             case FIND:
                 response = taskList.find(input);
                 break;
+            case SCHEDULE:
+                response = taskList.getScheduleFor(input);
+                break;
             default:
                 throw new InvalidInputException(INVALID_INPUT);
             }

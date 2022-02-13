@@ -2,24 +2,25 @@ package tutu.task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import tutu.exception.InvalidInputException;
 
 /** Represents an Event task. */
 public class Event extends Task {
+    /** Minimum size of input */
+    private static final int MINIMUM_INPUT_LENGTH = 6;
+    /** Error message for missing date and time */
+    private static final String DATE_TIME_MISSING = "Please include the date and time of event!";
+    /** Error message for empty task description */
+    private static final String EMPTY_INPUT_RESPONSE = "☹ OOPS!!! The description of an "
+            + "event cannot be empty.";
+
     /** Start date and time of the event */
     private LocalDateTime event;
     /** End date and time of the event */
     private LocalDateTime end;
-
-    /** Minimum size of input */
-    private static final int MINIMUM_INPUT_LENGTH = 6;
-    /** Error message for empty task description */
-    private static final String EMPTY_INPUT_RESPONSE = "☹ OOPS!!! The description of an " +
-            "event cannot be empty.";
-    /** Error message for missing date and time */
-    private static final String DATE_TIME_MISSING = "Please include the date and time of event!";
 
     /**
      * Constructor to create an Event object.
@@ -57,5 +58,23 @@ public class Event extends Task {
                 this.event.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a")),
                 this.event.format(DateTimeFormatter.ofPattern("h:mm a")),
                 this.end.format(DateTimeFormatter.ofPattern("h:mm a")));
+    }
+
+    /**
+     * Gets the LocalDate part of the event time.
+     * @return Date of event.
+     */
+    @Override
+    public LocalDate getDate() {
+        return event.toLocalDate();
+    }
+
+    /**
+     * Gets start time of event.
+     * @return LocalTime object containing start time of event.
+     */
+    @Override
+    public LocalTime getTime() {
+        return event.toLocalTime();
     }
 }
