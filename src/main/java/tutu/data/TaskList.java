@@ -142,6 +142,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Check if date of task matches the input date.
+     * @param task Task object to check.
+     * @param date Date to match with date of task.
+     * @return boolean value showing if date of task matches input date.
+     */
     public boolean dateMatches(Task task, LocalDate date) {
         if (task.getDate() == null) {
             return false;
@@ -149,6 +155,11 @@ public class TaskList {
         return task.getDate().isEqual(date);
     }
 
+    /**
+     * Gets the schedule for a specified date.
+     * @param cmd Input command by user containing specified date.
+     * @return Schedule containing tasks with specified date.
+     */
     public String getScheduleFor(String cmd) {
         // Parse input command in the form of "schedule for yyyy-MM-DD"
         String[] inputs = cmd.split(" ");
