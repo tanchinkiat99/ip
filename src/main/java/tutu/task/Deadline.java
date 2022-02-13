@@ -2,6 +2,7 @@ package tutu.task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import tutu.exception.InvalidInputException;
@@ -56,5 +57,23 @@ public class Deadline extends Task {
     public String isDone() {
         return String.format("[D][%s] %s (by: %s)", super.done ? "X" : " ", super.task,
                 this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a")));
+    }
+
+    /**
+     * Gets the LocalDate part of the deadline.
+     * @return Date of deadline.
+     */
+    @Override
+    public LocalDate getDate() {
+        return deadline.toLocalDate();
+    }
+
+    /**
+     * Gets time of deadline.
+     * @return LocalTime object containing time of deadline.
+     */
+    @Override
+    public LocalTime getTime() {
+        return deadline.toLocalTime();
     }
 }

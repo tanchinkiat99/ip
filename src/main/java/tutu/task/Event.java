@@ -2,6 +2,7 @@ package tutu.task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import tutu.exception.InvalidInputException;
@@ -57,5 +58,23 @@ public class Event extends Task {
                 this.event.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a")),
                 this.event.format(DateTimeFormatter.ofPattern("h:mm a")),
                 this.end.format(DateTimeFormatter.ofPattern("h:mm a")));
+    }
+
+    /**
+     * Gets the LocalDate part of the event time.
+     * @return Date of event.
+     */
+    @Override
+    public LocalDate getDate() {
+        return event.toLocalDate();
+    }
+
+    /**
+     * Gets start time of event.
+     * @return LocalTime object containing start time of event.
+     */
+    @Override
+    public LocalTime getTime() {
+        return event.toLocalTime();
     }
 }
