@@ -1,0 +1,7 @@
+.bodybg {
+    -fx-background-image: url("./images/background.jpg");
+    -fx-background: transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: 600, 400;
+}

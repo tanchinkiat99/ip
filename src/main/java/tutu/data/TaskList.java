@@ -81,7 +81,7 @@ public class TaskList {
         }
         String deleted = items.get(i - 1).isDone();
         items.remove(i - 1);
-        return String.format("Noted. I have removed this task: %s\nYou now have %d task%s in the list.",
+        return String.format("Noted. I have removed this task:\n%s\nYou now have %d task%s in the list.",
                 deleted, items.size(), items.size() == 1 ? "" : "s");
     }
 

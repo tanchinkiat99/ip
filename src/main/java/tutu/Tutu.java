@@ -9,6 +9,7 @@ import tutu.task.Deadline;
 import tutu.task.Event;
 import tutu.task.ToDo;
 import tutu.user.Parser;
+import tutu.user.Ui;
 
 /** Represents a todo list that takes in command inputs from the user. */
 public class Tutu {
@@ -25,7 +26,7 @@ public class Tutu {
         try {
             switch (Parser.checkFunction(input)) {
             case BYE:
-                response = EXIT_MESSAGE;
+                Ui.exit();
                 break;
             case LIST:
                 response = store.list();
@@ -68,8 +69,8 @@ public class Tutu {
             default:
                 throw new InvalidInputException(INVALID_INPUT);
             }
-        } catch (InvalidInputException | IOException e) {
-            InvalidInputException.showErrorAlert(e);
+        } catch (InvalidInputException | IOException | InterruptedException e) {
+            Ui.showErrorAlert(e);
         }
         return response;
     }
