@@ -1,7 +1,5 @@
 package tutu.exception;
 
-import javafx.scene.control.Alert;
-
 /** Represents an Exception that is thrown when the user input is invalid. */
 public class InvalidInputException extends Exception {
     /**

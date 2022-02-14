@@ -1,9 +1,9 @@
 package tutu.user;
 
+import java.util.Optional;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-
-import java.util.Optional;
 
 /**
  * To handle user interactions.
