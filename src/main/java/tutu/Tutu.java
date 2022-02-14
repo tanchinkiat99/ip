@@ -18,7 +18,7 @@ public class Tutu {
     /** Exit message */
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
     /** Response message for invalid user input */
-    private static final String INVALID_INPUT = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String INVALID_INPUT = "OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     public String getResponse(String input, Storage store) {
         String response = "";
@@ -32,12 +32,12 @@ public class Tutu {
                 break;
             case MARK:
                 int i = Integer.parseInt(input.substring(5));
-                taskList.mark(i);
+                response = taskList.mark(i);
                 store.update(taskList);
                 break;
             case UNMARK:
                 int j = Integer.parseInt(input.substring(7));
-                taskList.unmark(j);
+                response = taskList.unmark(j);
                 store.update(taskList);
                 break;
             case TODO:
@@ -69,7 +69,7 @@ public class Tutu {
                 throw new InvalidInputException(INVALID_INPUT);
             }
         } catch (InvalidInputException | IOException e) {
-            return String.valueOf(e);
+            InvalidInputException.showErrorAlert(e);
         }
         return response;
     }
