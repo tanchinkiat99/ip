@@ -29,8 +29,8 @@ public class MainWindow extends AnchorPane {
 
     private Storage store;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/tanjiro.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/zenitsu.jpg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/tanjiro.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/zenitsu.png"));
 
     public MainWindow() {}
 
