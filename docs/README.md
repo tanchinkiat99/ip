@@ -21,6 +21,19 @@ Mr. Tutu is a desktop app for managing and keeping track of your daily tasks, op
 
 ## Quick Start
 
+1. Ensure you have Java 11 or above installed in your Computer.
+2. Download the latest mrtutu.jar from [here](https://github.com/tanchinkiat99/ip/releases/tag/A-Jar).
+3. Copy the file to the folder you want to use as the home folder for Mr. Tutu.
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
+5. Type the command in the command box and press Enter or click on the "Send" button to execute it. e.g. typing help and pressing Enter will open the help window.
+   Some example commands you can try:
+   - `list`: Lists all tasks in the task list. 
+   - `todo wash clothes` : Adds a to-do task "wash clothes" to the list. 
+   - `mark 1` : Marks the first task as done. 
+   - `delete 3` : Deletes the third task in the list. 
+   - `bye` : Exits the app. 
+
+
 ## Features 
 
 ### Adding a Todo task: `todo`
