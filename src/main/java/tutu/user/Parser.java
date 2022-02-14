@@ -36,7 +36,7 @@ public class Parser {
         } else if (cmd.length() > 8 && cmd.substring(0, 8).equals("schedule")) {
             return Function.SCHEDULE;
         } else {
-            throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new InvalidInputException("OOPS! I'm sorry, but I don't know what that means...");
         }
     }
 }

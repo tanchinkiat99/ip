@@ -12,7 +12,7 @@ public class Deadline extends Task {
     /** Minimum size of input */
     private static final int MINIMUM_INPUT_LENGTH = 10;
     /** Error message for empty task description */
-    private static final String EMPTY_INPUT_RESPONSE = "☹ OOPS!!! The description of a "
+    private static final String EMPTY_INPUT_RESPONSE = "OOPS!!! The description of a "
             + "deadline cannot be empty.";
     /** Error message for missing deadline */
     private static final String DEADLINE_MISSING = "Please include the deadline!";

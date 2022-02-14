@@ -16,7 +16,7 @@ public class TaskList {
     /** Response message for out of range index input */
     private static final String OUT_OF_RANGE = "Oops! Index is out of range";
     /** Response message for empty delete input */
-    private static final String EMPTY_DELETE_INPUT = "☹ OOPS!!! Please include the task you want to delete.";
+    private static final String EMPTY_DELETE_INPUT = "OOPS!!! Please include the task you want to delete.";
     /** Response message for empty find input */
     private static final String EMPTY_FIND_INPUT = "Please input a keyword!";
     /** Response message for 0 matches for find command */
@@ -81,7 +81,7 @@ public class TaskList {
         }
         String deleted = items.get(i - 1).isDone();
         items.remove(i - 1);
-        return String.format("Noted. I have removed this task:\n%sYou now have %d task%s in the list.",
+        return String.format("Noted. I have removed this task:\n%s\nYou now have %d task%s in the list.",
                 deleted, items.size(), items.size() == 1 ? "" : "s");
     }
 

@@ -29,8 +29,8 @@ public class MainWindow extends AnchorPane {
 
     private Storage store;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/tanjiro.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/zenitsu.jpg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/tanjiro.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/zenitsu.png"));
 
     public MainWindow() {}
 
@@ -63,10 +63,12 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input, store);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        if (response != "") {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+        }
         userInput.clear();
     }
 }

@@ -14,7 +14,7 @@ public class Event extends Task {
     /** Error message for missing date and time */
     private static final String DATE_TIME_MISSING = "Please include the date and time of event!";
     /** Error message for empty task description */
-    private static final String EMPTY_INPUT_RESPONSE = "☹ OOPS!!! The description of an "
+    private static final String EMPTY_INPUT_RESPONSE = "OOPS!!! The description of an "
             + "event cannot be empty.";
 
     /** Start date and time of the event */
