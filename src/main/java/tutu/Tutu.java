@@ -16,8 +16,6 @@ public class Tutu {
     /** TaskList object that stores the tasks added */
     private static TaskList taskList = new TaskList();
 
-    /** Exit message */
-    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
     /** Response message for invalid user input */
     private static final String INVALID_INPUT = "OOPS!!! I'm sorry, but I don't know what that means :-(";
 
