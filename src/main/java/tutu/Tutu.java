@@ -17,7 +17,7 @@ public class Tutu {
     private static TaskList taskList = new TaskList();
 
     /** Response message for invalid user input */
-    private static final String INVALID_INPUT = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String INVALID_INPUT = "OOPS! I'm sorry, but I don't know what that means";
 
     public String getResponse(String input, Storage store) {
         String response = "";
